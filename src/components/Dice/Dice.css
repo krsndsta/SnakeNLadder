@@ -1,0 +1,216 @@
+.dice-control-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* Turn Banner */
+.turn-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.5rem;
+}
+
+.active-player-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.active-player-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1.5px solid currentColor;
+}
+
+.active-player-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.active-player-pos {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Dice Container */
+.dice-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dice-cube {
+  width: 64px;
+  height: 64px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 0 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 8px;
+  position: relative;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.dice-cube.rolling {
+  animation: dice-tumble 0.6s infinite ease-in-out;
+}
+
+@keyframes dice-tumble {
+  0% { transform: rotate(0deg) scale(0.95); }
+  25% { transform: rotate(-15deg) scale(1.05); }
+  50% { transform: rotate(15deg) scale(0.95); }
+  75% { transform: rotate(-10deg) scale(1.02); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Dice pips */
+.pip {
+  width: 10px;
+  height: 10px;
+  background-color: #0f172a;
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+/* Pip positions for standard dice faces */
+.dice-face-placeholder {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #64748b;
+}
+
+/* Roll Button */
+.roll-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.roll-action-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.roll-action-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.roll-action-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
+/* Status message */
+.turn-status-message {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-height: 1.4rem;
+  padding: 0 0.5rem;
+}
+
+/* Winner Banner */
+.winner-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(244, 63, 94, 0.2));
+  border: 2px solid var(--accent-gold);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); }
+}
+
+.winner-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.winner-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.play-again-btn {
+  margin-top: 0.5rem;
+  background: var(--accent-gold);
+  color: #0f172a;
+  border: none;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.play-again-btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .dice-control-panel {
+    padding: 1rem;
+  }
+
+  .turn-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .roll-action-btn {
+    width: 100%;
+  }
+}
